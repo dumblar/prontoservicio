@@ -32,3 +32,7 @@ Pasos para seguir después de clonar el repositorio
 - Crear super usuario (Recomendado únicamente si no se ha realizado)
 	
 	    python manage.py createsuperuser
+
+## Crear apps
+
+python manage.py startapp [NOMBRE APP]

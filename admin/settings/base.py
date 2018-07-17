@@ -37,7 +37,8 @@ INSTALLED_APPS = [
 
     # apps
     'companies',
-    'patients'
+    'patients',
+    'shipping',
 ]
 
 MIDDLEWARE = [
