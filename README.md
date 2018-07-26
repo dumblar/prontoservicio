@@ -9,7 +9,7 @@ Pasos para seguir después de clonar el repositorio
 
 2. Instalar dependencias o requerimientos
 
-        pip install requirements.txt
+        pip install -r requirements.txt
 
 4. Guardar nuevas dependencias (En caso de instalar nuevas dependencias)
 
