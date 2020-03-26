@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vh3OaOr86bD+ICtyQsGpwwEXJKiI9zoUjt4G5y1bt/TkUkkkQLo1G+PU75t81Esw//CjNPnPhR19Ugzd7rrXYw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alejandro\\source\\repos\\ProntoServicio\\ProntoServicio\\ProntoServicio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alejandro\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.8\\microsoft.visualstudio.azure.containers.tools.targets.1.10.8.nupkg.sha512"
+  ],
+  "logs": []
+}
