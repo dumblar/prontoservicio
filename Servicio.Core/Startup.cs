@@ -34,7 +34,7 @@ namespace Servicio.Core
 
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins("https://pronto-servicio.herokuapp.com", "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins( "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddMvc(setupAction =>
             {
