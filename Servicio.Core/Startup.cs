@@ -32,11 +32,11 @@ namespace Servicio.Core
             opciones.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ProntoServicio, ProntoServicio>();
 
-            services.AddCors(options => options.AddPolicy("AllowMyOrigin", builder =>
-            {
-                builder.WithOrigins("http://prontosolicitudes.datecno.net");
+        //    services.AddCors(options => options.AddPolicy("AllowMyOrigin", builder =>
+        //    {
+        //        builder.WithOrigins("http://prontosolicitudes.datecno.net");
 
-        }));
+        //}));
 
             services.AddMvc(setupAction =>
             {
@@ -52,7 +52,7 @@ namespace Servicio.Core
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("ApiCorsPolicy");
+            //app.UseCors("ApiCorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
