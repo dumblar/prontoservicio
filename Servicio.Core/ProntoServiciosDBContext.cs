@@ -14,9 +14,19 @@ namespace Servicio.Core
 
         }
         public DbSet<TblUsuarios> TblUsuarios { get; set; }
+        public DbSet<TblSolicitudesCaracteristicas> TblSolicitudesCaracteristicas { get; set; }
+        public DbSet<TblTerceros> TblTerceros { get; set; }
+        public DbSet<TblSolicitudes> TblSolicitudes { get; set; }
+        public DbSet<SpSolicitudesConsultar> SpSolicitudesConsultar { get; set; }
+        public DbSet<TblMoviles> TblMoviles { get; set; }
         protected override void OnModelCreating(ModelBuilder model)
         {
             new TblUsuarios.Mapeo(model.Entity<TblUsuarios>());
+            new TblSolicitudesCaracteristicas.Mapeo(model.Entity<TblSolicitudesCaracteristicas>());
+            new TblTerceros.Mapeo(model.Entity<TblTerceros>());
+            new TblSolicitudes.Mapeo(model.Entity<TblSolicitudes>());
+            new TblMoviles.Mapeo(model.Entity<TblMoviles>());
+            new SpSolicitudesConsultar.Mapeo(model.Entity<SpSolicitudesConsultar>());
 
         }
     }

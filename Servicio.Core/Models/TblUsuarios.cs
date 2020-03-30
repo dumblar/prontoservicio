@@ -25,7 +25,7 @@ namespace Servicio.Core.Models
             {
                 mapeoUsuario.HasKey(d => d.Id_Usuario);
                 //mapeoUsuario.Property(d=> d.Descripcion).HasColumnName
-                //mapeoUsuario.Property(d => d.Descripcion);
+                //mapeoUsuario.Property(d => d.Descripcion).HasColumnName("Descripcion");
                 //mapeoUsuario.Property(d => d.Rol);
                 //mapeoUsuario.Property(d => d.Usuario);
                 //mapeoUsuario.Property(d => d.Contrasena);
