@@ -34,8 +34,9 @@ namespace Servicio.Core
 
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins( "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("http://prontosolicitudes.datecno.net/STANDARD/index.html").AllowAnyMethod().AllowAnyHeader();
             }));
+
             services.AddMvc(setupAction =>
             {
                 setupAction.EnableEndpointRouting = false;
