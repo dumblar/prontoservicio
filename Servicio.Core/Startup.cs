@@ -34,7 +34,7 @@ namespace Servicio.Core
 
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins("http://prontosolicitudes.datecno.net/STANDARD/index.html").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins().AllowAnyOrigin();
             }));
 
             services.AddMvc(setupAction =>
