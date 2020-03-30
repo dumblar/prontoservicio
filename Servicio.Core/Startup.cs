@@ -33,7 +33,7 @@ namespace Servicio.Core
             services.AddTransient<ProntoServicio, ProntoServicio>();
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins("http://192.168.1.59:8080").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("https://pronto-servicio.herokuapp.com", "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddMvc(setupAction =>
             {
