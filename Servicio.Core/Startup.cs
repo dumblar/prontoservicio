@@ -32,10 +32,11 @@ namespace Servicio.Core
             opciones.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ProntoServicio, ProntoServicio>();
 
-            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            services.AddCors(options => options.AddPolicy("AllowMyOrigin", builder =>
             {
-                builder.WithOrigins().AllowAnyOrigin();
-            }));
+                builder.WithOrigins("http://prontosolicitudes.datecno.net");
+
+        }));
 
             services.AddMvc(setupAction =>
             {
