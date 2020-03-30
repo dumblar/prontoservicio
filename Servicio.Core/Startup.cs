@@ -32,26 +32,25 @@ namespace Servicio.Core
             opciones.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ProntoServicio, ProntoServicio>();
 
-            //services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
-            //{
-            //    builder.WithOrigins("https://pronto-servicio.herokuapp.com", "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
-            //}));
-            //services.AddMvc(setupAction =>
-            //{
-            //    setupAction.EnableEndpointRouting = false;
-            //}).
-            //    AddJsonOptions(jsonOptions =>
-            //    {
-            //        jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
-            //    }).
-            //        SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            {
+                builder.WithOrigins("https://pronto-servicio.herokuapp.com", "http://prontosolicitudes.datecno.net").AllowAnyMethod().AllowAnyHeader();
+            }));
+            services.AddMvc(setupAction =>
+            {
+                setupAction.EnableEndpointRouting = false;
+            }).
+                AddJsonOptions(jsonOptions =>
+                {
+                    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+                }).
+                    SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseCors("ApiCorsPolicy");
-
+            app.UseCors("ApiCorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
