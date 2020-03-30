@@ -9,7 +9,7 @@ using Servicio.Core.Services;
 
 namespace Servicio.Core.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProntoServicioController : ControllerBase
     {
@@ -19,14 +19,7 @@ namespace Servicio.Core.Controllers
             _prontoService = serv;
         }
 
-        [HttpGet]
-        [Route("iniciarsesion/{usuario}/{contrasena}")]
-        public ActionResult IniciarSesionn(string usuario, string contrasena)
-        {
-            TblUsuarios usu = _prontoService.IniciarSesion(usuario, contrasena);
-            return Ok(usu);
-        }
-
+      
         [HttpGet]
         [Route("usuarios/iniciarSesion/{usuario}/{contrasena}")]
         public ActionResult IniciarSesion(string usuario, string contrasena)
