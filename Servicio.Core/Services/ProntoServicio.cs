@@ -83,8 +83,8 @@ namespace Servicio.Core.Services
             TimeSpan ts2 = new TimeSpan(23, 59, 59);
             fechaInicio = fechaInicio.Date + ts;
             fechaFin = fechaFin.Date + ts2;
-            string strFechaInicio = "STR_TO_DATE('" + fechaInicio.ToString("dd/MM/yyyyHH:mm:ss").Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%h:%i:%s%p') ";
-            string strFechaFin = "STR_TO_DATE('" + fechaFin.ToString("dd/MM/yyyyHH:mm:ss").Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%h:%i:%s%p') ";
+            string strFechaInicio = "STR_TO_DATE('" + fechaInicio.ToString("dd/MM/yyyyHH:mm:ss").Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%H:%i:%s') ";
+            string strFechaFin = "STR_TO_DATE('" + fechaFin.ToString("dd/MM/yyyyHH:mm:ss").Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%H:%i:%s') ";
             string sql = $"call innovaci_ProntoAmbulancias.SpSolicitudesConsultar('{usuario}', {strFechaInicio}, {strFechaFin}, {editando}, {id_company});";
             Console.WriteLine(sql);
             consulta = _prontoContext.SpSolicitudesConsultar.FromSql(sql).ToList();
