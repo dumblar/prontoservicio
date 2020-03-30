@@ -74,64 +74,65 @@ namespace Servicio.Core.Services
         //{
         //    throw new NotImplementedException();
         //}
-        public  List<TblSolicitudesTO> GetSolicitudes(string usuario, DateTime fechaInicio, DateTime fechaFin, bool editando, int id_company)
+        public List<TblSolicitudesTO> GetSolicitudes(string usuario, DateTime fechaInicio, DateTime fechaFin, bool editando, int id_company)
         {
             List<SpSolicitudesConsultar> consulta = new List<SpSolicitudesConsultar>();
             List<TblSolicitudesTO> resultado = new List<TblSolicitudesTO>();
-           
-                TimeSpan ts = new TimeSpan(00, 00, 0);
-                TimeSpan ts2 = new TimeSpan(23, 59, 59);
-                fechaInicio = fechaInicio.Date + ts;
-                fechaFin = fechaFin.Date + ts2;
+
+            TimeSpan ts = new TimeSpan(00, 00, 0);
+            TimeSpan ts2 = new TimeSpan(23, 59, 59);
+            fechaInicio = fechaInicio.Date + ts;
+            fechaFin = fechaFin.Date + ts2;
             string strFechaInicio = "STR_TO_DATE('" + fechaInicio.ToString().Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%h:%i:%s%p') ";
             string strFechaFin = "STR_TO_DATE('" + fechaFin.ToString().Replace(" ", "").Replace(".", "") + "', '%d/%m/%Y%h:%i:%s%p') ";
             string sql = $"call innovaci_ProntoAmbulancias.SpSolicitudesConsultar('{usuario}', {strFechaInicio}, {strFechaFin}, {editando}, {id_company});";
-             consulta = _prontoContext.SpSolicitudesConsultar.FromSql(sql).ToList();
+            Console.WriteLine(sql);
+            consulta = _prontoContext.SpSolicitudesConsultar.FromSql(sql).ToList();
 
-                foreach (SpSolicitudesConsultar sol in consulta)
+            foreach (SpSolicitudesConsultar sol in consulta)
+            {
+                //List<TblSolicitudesNotas> consutlanotas = _prontoSerContext.get NotasConsultar(sol.Id_Solicitud);
+                sol.FechaCita = sol.FechaCita;
+                sol.FechaRegistro = sol.FechaRegistro;
+                sol.FechaRecoger = sol.FechaRecoger;
+                if (sol.FechaDespacho != null)
+                    sol.FechaDespacho = sol.FechaDespacho.Value;
+                if (sol.FechaLlego != null)
+                    sol.FechaLlego = sol.FechaLlego.Value;
+                resultado.Add(new TblSolicitudesTO()
                 {
-                    //List<TblSolicitudesNotas> consutlanotas = _prontoSerContext.get NotasConsultar(sol.Id_Solicitud);
-                    sol.FechaCita = sol.FechaCita;
-                    sol.FechaRegistro = sol.FechaRegistro;
-                    sol.FechaRecoger = sol.FechaRecoger;
-                    if (sol.FechaDespacho != null)
-                        sol.FechaDespacho = sol.FechaDespacho.Value;
-                    if (sol.FechaLlego != null)
-                        sol.FechaLlego = sol.FechaLlego.Value;
-                    resultado.Add(new TblSolicitudesTO()
+                    Solicitud = EntityTransport<TblSolicitudes>.Copy(sol, new TblSolicitudes()),
+                    Paciente = new TblTerceros()
                     {
-                        Solicitud = EntityTransport<TblSolicitudes>.Copy(sol, new TblSolicitudes()),
-                        Paciente = new TblTerceros()
-                        {
-                            Id_Tercero = sol.Id_Tercero,
-                            Apellidos = sol.ApellidosPaciente,
-                            Descripcion = sol.DescripcionPaciente,
-                            Edad = sol.Edad,
-                            EPS = sol.EPS,
-                            TipoTercero = 3
-                        },
-                        //Tiempos = AdminSolicitudes.TiemposConsultar(sol.Id_Solicitud),
-                        //Eventos = AdminSolicitudes.EventosConsultar(sol.Id_Solicitud),
-                        //Notas = consutlanotas,
-                        DescripcionAutoriza = sol.DescripcionAutoriza,
-                        DescripcionUsuarioRecibe = sol.DescripcionUsuarioRecibe,
-                        DescripcionUsuarioRegistra = sol.DescripcionUsuarioRegistra,
-                        DescripcionConductor = sol.DescripcionConductor,
-                        DescripcionAutorizaRemision = sol.DescripcionRemision,
-                        DescripcionDestino = sol.DescripcionDestino,
-                        DescripcionProcedencia = sol.DescripcionProcedencia,
-                        DescripcionMovil = sol.DescripcionMovil,
-                        DescripcionMovilEntrega = sol.DescripcionMovilEntrega,
-                        DescripcionTipoAmbulancia = sol.TipoAmbulancia == 1 ? "BAJA" : sol.TipoAmbulancia == 2 ? "ALTA" : "",
-                        DescripcionTipoServicio = sol.TipoServicio == 1 ? "PRIMARIO" : sol.TipoServicio == 2 ? "SECUNDARIO" : "",
-                        DescripcionTipoPaciente = sol.TipoPaciente == 1 ? "ADULTO" : sol.TipoPaciente == 2 ? "PEDIATRICO" : "",
-                        DescripcionEstado = sol.Estado == 1 ? "Pendiente" : sol.Estado == 2 ? "Aporobado" : sol.Estado == 3 ? "Completado" : sol.Estado == 4 ? "Rechazado" : "",
-                        //DescripcionNotas = AdminSolicitudes.DescripcionNotasConsultar(consutlanotas),
-                        DescripcionEPSRegistra = sol.Grupo
-                    });
-                }
-                return resultado.OrderBy(r => r.Solicitud.FechaCita).ToList();
-            
+                        Id_Tercero = sol.Id_Tercero,
+                        Apellidos = sol.ApellidosPaciente,
+                        Descripcion = sol.DescripcionPaciente,
+                        Edad = sol.Edad,
+                        EPS = sol.EPS,
+                        TipoTercero = 3
+                    },
+                    //Tiempos = AdminSolicitudes.TiemposConsultar(sol.Id_Solicitud),
+                    //Eventos = AdminSolicitudes.EventosConsultar(sol.Id_Solicitud),
+                    //Notas = consutlanotas,
+                    DescripcionAutoriza = sol.DescripcionAutoriza,
+                    DescripcionUsuarioRecibe = sol.DescripcionUsuarioRecibe,
+                    DescripcionUsuarioRegistra = sol.DescripcionUsuarioRegistra,
+                    DescripcionConductor = sol.DescripcionConductor,
+                    DescripcionAutorizaRemision = sol.DescripcionRemision,
+                    DescripcionDestino = sol.DescripcionDestino,
+                    DescripcionProcedencia = sol.DescripcionProcedencia,
+                    DescripcionMovil = sol.DescripcionMovil,
+                    DescripcionMovilEntrega = sol.DescripcionMovilEntrega,
+                    DescripcionTipoAmbulancia = sol.TipoAmbulancia == 1 ? "BAJA" : sol.TipoAmbulancia == 2 ? "ALTA" : "",
+                    DescripcionTipoServicio = sol.TipoServicio == 1 ? "PRIMARIO" : sol.TipoServicio == 2 ? "SECUNDARIO" : "",
+                    DescripcionTipoPaciente = sol.TipoPaciente == 1 ? "ADULTO" : sol.TipoPaciente == 2 ? "PEDIATRICO" : "",
+                    DescripcionEstado = sol.Estado == 1 ? "Pendiente" : sol.Estado == 2 ? "Aporobado" : sol.Estado == 3 ? "Completado" : sol.Estado == 4 ? "Rechazado" : "",
+                    //DescripcionNotas = AdminSolicitudes.DescripcionNotasConsultar(consutlanotas),
+                    DescripcionEPSRegistra = sol.Grupo
+                });
+            }
+            return resultado.OrderBy(r => r.Solicitud.FechaCita).ToList();
+
         }
 
       
