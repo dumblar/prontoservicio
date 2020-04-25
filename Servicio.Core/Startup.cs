@@ -31,7 +31,6 @@ namespace Servicio.Core
             services.AddDbContext<ProntoServiciosDBContext>(opciones =>
             opciones.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ProntoServicio, ProntoServicio>();
-            services.AddTransient<ProntoNetServicio, ProntoNetServicio>();
 
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
