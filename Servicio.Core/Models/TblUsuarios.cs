@@ -18,12 +18,14 @@ namespace Servicio.Core.Models
         public string Grupo { get; set; }
         public int Sexo { get; set; }
         public int Id_Company { get; set; }
+        public string Token { get; internal set; }
 
         public class Mapeo
         {
             public Mapeo(EntityTypeBuilder <TblUsuarios> mapeoUsuario)
             {
                 mapeoUsuario.HasKey(d => d.Id_Usuario);
+                mapeoUsuario.Ignore("Token");
                 //mapeoUsuario.Property(d=> d.Descripcion).HasColumnName
                 //mapeoUsuario.Property(d => d.Descripcion).HasColumnName("Descripcion");
                 //mapeoUsuario.Property(d => d.Rol);

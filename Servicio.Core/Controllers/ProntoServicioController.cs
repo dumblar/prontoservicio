@@ -19,7 +19,7 @@ namespace Servicio.Core.Controllers
             _prontoService = serv;
         }
 
-      
+
         [HttpGet]
         [Route("usuarios/iniciarSesion/{usuario}/{contrasena}")]
         public ActionResult IniciarSesion(string usuario, string contrasena)
@@ -88,6 +88,15 @@ namespace Servicio.Core.Controllers
             return Ok(_prontoService.GetMoviles(int.Parse(id_company)));
         }
 
+        //[HttpPost]
+        //[Route("solicitudes/ooee")]
+        //public bool prueba()
+        //{
+        //    string trin = HttpContext.Request.ToString();
+
+
+        //    return true;
+        //}
         //[HttpGet]
         //[Route("tiposEventos/consultar")]
         //public ActionResult tiposEventosConsutlar()
